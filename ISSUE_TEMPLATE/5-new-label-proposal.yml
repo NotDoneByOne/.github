@@ -1,0 +1,281 @@
+name: Предложение новой метки или категории
+description: Предложите новую метку, тип задачи или категорию для организации NotDoneByOne
+title: "[МЕТКА]: "
+labels: ["type: улучшение"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Предложение новой метки или категории
+        
+        Используйте эту форму для предложения:
+        - Новых меток для Issues и Pull Requests
+        - Новых категорий задач (type, priority, status)
+        - Изменений в существующей системе классификации
+        
+        Перед предложением проверьте текущую систему меток в документации.
+
+  - type: input
+    id: label_name
+    attributes:
+      label: Название метки
+      description: Предлагаемое название для новой метки
+      placeholder: "Например: type: безопасность, priority: срочно, тест"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: label_category
+    attributes:
+      label: Категория метки
+      description: К какой категории относится новая метка?
+      options:
+        - "type: (тип задачи)"
+        - "priority: (приоритет)"
+        - "status: (статус)"
+        - "scope: (область/проект)"
+        - "version: (версия)"
+        - "team: (команда/ответственный)"
+        - "Без категории (обычная метка)"
+        - "Другая категория (укажите ниже)"
+    validations:
+      required: true
+
+  - type: input
+    id: custom_category
+    attributes:
+      label: Другая категория
+      description: Если выбрали "Другая категория", укажите ее название
+      placeholder: "Например: component:, language:, platform:"
+    validations:
+      required: false
+
+  - type: input
+    id: label_color
+    attributes:
+      label: Цвет метки
+      description: Предложите цвет в формате HEX (6 символов, без #)
+      placeholder: "A3BE8C или 5E81AC (цвета из палитры NDO)"
+      value: "5E81AC"
+    validations:
+      required: true
+      pattern: "^[0-9A-Fa-f]{6}$"
+
+  - type: textarea
+    id: label_description
+    attributes:
+      label: Описание метки
+      description: Краткое описание назначения и использования метки
+      placeholder: "Например: Задачи, связанные с безопасностью кода или инфраструктуры"
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Для каких задач предназначена метка?
+      description: Опишите конкретные ситуации или типы задач для этой метки
+      placeholder: |
+        ### Примеры использования:
+        1. Ситуация: Обнаружение уязвимости в коде
+        2. Ситуация: Обновление зависимостей с точки зрения безопасности
+        3. Ситуация: Аудит безопасности приложения
+        4. Ситуация: Настройка безопасных конфигураций
+    validations:
+      required: true
+
+  - type: textarea
+    id: existing_labels_check
+    attributes:
+      label: Почему существующих меток недостаточно?
+      description: Объясните, почему нельзя использовать текущие метки (`type: ошибка`, `type: улучшение` и т.д.)
+      placeholder: |
+        Примеры причин:
+        - Существующие метки слишком общие для этой категории задач
+        - Эта категория задач требует отдельного отслеживания
+        - Улучшит фильтрацию и поиск Issues
+        - Поможет в анализе и отчетности
+    validations:
+      required: true
+
+  - type: dropdown
+    id: expected_frequency
+    attributes:
+      label: Ожидаемая частота использования
+      description: Как часто, по вашему мнению, будет использоваться эта метка?
+      options:
+        - "Очень часто (несколько раз в неделю)"
+        - "Часто (несколько раз в месяц)"
+        - "Умеренно (раз в 1-2 месяца)"
+        - "Редко (несколько раз в квартал)"
+        - "Очень редко (несколько раз в год)"
+        - "Сезонно/периодически (в определенные периоды)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: related_labels
+    attributes:
+      label: Связанные существующие метки
+      description: С какими существующими метками будет связана новая метка?
+      options:
+        - label: "type: ошибка"
+        - label: "type: функциональность"
+        - label: "type: улучшение"
+        - label: "type: документация"
+        - label: "type: рефакторинг"
+        - label: "type: технический долг"
+        - label: "priority: высокий"
+        - label: "priority: средний"
+        - label: "priority: низкий"
+        - label: "status: в работе"
+        - label: "status: требуется ревью"
+        - label: "Другие (укажите ниже)"
+
+  - type: textarea
+    id: other_related_labels
+    attributes:
+      label: Другие связанные метки
+      description: Если есть другие связанные метки, укажите их здесь
+      placeholder: "Например: безопасность, критический баг, срочно"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: docs_to_update
+    attributes:
+      label: Документы для обновления
+      description: Какие документы нужно обновить при добавлении этой метки?
+      options:
+        - label: "[Onboarding Guide](ONBOARDING.md) — раздел о метках"
+        - label: "[Руководство по вкладу](CONTRIBUTING.md) — раздел о метках"
+        - label: "Шаблоны Issues (для автоматического добавления)"
+        - label: "Шаблоны Pull Request"
+        - label: "README.md репозитория .github"
+        - label: "Шпаргалку/чеклист по меткам"
+        - label: "GitHub Projects/Boards настройки"
+        - label: "Другие (укажите ниже)"
+
+  - type: textarea
+    id: other_docs_to_update
+    attributes:
+      label: Другие документы для обновления
+      description: Если есть другие документы, требующие обновления
+      placeholder: "Например: документация конкретного проекта, руководства модераторов"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: testing_approach
+    attributes:
+      label: Подход к внедрению
+      description: Как лучше внедрить новую метку?
+      options:
+        - "Пилотное тестирование в одном репозитории"
+        - "Пилотное тестирование в нескольких репозиториях"
+        - "Сразу во всех репозиториях организации"
+        - "Только в репозитории .github (для общих процессов)"
+        - "Поэтапное внедрение (сначала документы, потом репозитории)"
+    validations:
+      required: true
+
+  - type: input
+    id: pilot_repository
+    attributes:
+      label: Репозиторий для пилотного тестирования
+      description: Если выбран пилотный подход, укажите репозиторий
+      placeholder: "Например: NotDoneByOne/core-library или NotDoneByOne/web-app"
+    validations:
+      required: false
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Критерии успеха
+      description: Как мы поймем, что метка полезна и используется правильно?
+      placeholder: |
+        Примеры критериев:
+        1. Критерий: Метка используется не реже X раз в месяц
+        2. Критерий: Помогает лучше классифицировать задачи определенного типа
+        3. Критерий: Упрощает поиск и фильтрацию Issues
+        4. Критерий: Получает положительные отзывы от команды
+    validations:
+      required: true
+
+  - type: textarea
+    id: potential_issues
+    attributes:
+      label: Потенциальные проблемы и решения
+      description: Какие могут возникнуть проблемы при внедрении и как их решить?
+      placeholder: |
+        Примеры:
+        - Проблема: Путаница с похожими метками
+          Решение: Четкое описание и примеры использования
+        - Проблема: Низкая частота использования
+          Решение: Обучение команды и напоминания
+        - Проблема: Неправильное использование
+          Решение: Модерация и корректировка
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: migration_needed
+    attributes:
+      label: Требуется миграция существующих Issues?
+      description: Нужно ли обновить существующие Issues с новой меткой?
+      options:
+        - label: "Да, нужно добавить метку к существующим Issues (укажите критерии ниже)"
+        - label: "Нет, применять только к новым Issues"
+        - label: "Выборочно, по решению модераторов"
+
+  - type: textarea
+    id: migration_criteria
+    attributes:
+      label: Критерии миграции
+      description: Если требуется миграция, опишите какие Issues нужно обновить
+      placeholder: |
+        Примеры критериев:
+        - Все Issues с определенными ключевыми словами в названии
+        - Issues, созданные за последние N месяцев
+        - Issues определенных типов (ошибки, улучшения)
+        - Issues с определенными существующими метками
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: proposal_priority
+    attributes:
+      label: Приоритет предложения
+      description: Насколько срочно нужно рассмотреть это предложение?
+      options:
+        - label: "priority: высокий (критически важно для текущих процессов)"
+        - label: "priority: средний (важное улучшение, но может подождать)"
+        - label: "priority: низкий (косметическое улучшение системы)"
+
+  - type: checkboxes
+    id: community_discussion
+    attributes:
+      label: Требуется обсуждение сообщества
+      description: Нужно ли обсуждение с более широким кругом участников?
+      options:
+        - label: "Да, требуется обсуждение сообщества (добавить метку 'нужна помощь')"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Процесс рассмотрения
+        
+        После создания предложения:
+        1. Предложение будет рассмотрено командой в течение 7 рабочих дней
+        2. Может потребоваться обсуждение с сообществом
+        3. Будет принято решение о принятии, отклонении или доработке
+        4. В случае принятия будет создан план внедрения
+        
+        Факторы, влияющие на решение:
+        - Соответствие текущей системе классификации
+        - Потенциальная польза для организации
+        - Сложность внедрения и поддержки
+        - Обратная связь от сообщества
+        
+        Спасибо за ваше предложение по улучшению системы классификации NDO!
