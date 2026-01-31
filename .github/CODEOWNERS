@@ -1,0 +1,15 @@
+# Владельцы для всей документации по процессам
+*.md                 @NotDoneByOne/core-team
+
+# Владельцы для шаблонов Issues и Pull Request
+/.github/ISSUE_TEMPLATE/*        @NotDoneByOne/maintainers
+/.github/PULL_REQUEST_TEMPLATE/* @NotDoneByOne/maintainers
+
+# Владельцы для конфигураций GitHub Actions
+/.github/workflows/*             @NotDoneByOne/devops-team
+
+# Владельцы для общих шаблонов репозиториев
+/repository-templates/**/*.md    @NotDoneByOne/maintainers @NotDoneByOne/core-team
+
+# Владелец самого файла CODEOWNERS (повышает безопасность)
+/.github/CODEOWNERS              @NotDoneByOne/org-admin
